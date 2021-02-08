@@ -1,0 +1,7 @@
+*.class
+
+# Folders
+.gradle/
+.idea/
+build/
+out
