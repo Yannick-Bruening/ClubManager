@@ -8,7 +8,7 @@ public class CliHelper {
 
   public static String getConsoleInput(final String prefix) {
     System.out.print(prefix);
-    return new Scanner(System.in).next();
+    return new Scanner(System.in).nextLine();
   }
 
   public static Integer getIntegerFromConsole(final String prefix) {
@@ -38,6 +38,10 @@ public class CliHelper {
 
   public static void println(final String message) {
     System.out.println(message);
+  }
+
+  public static void printf(final String format, final Object... args) {
+    System.out.printf(format + "\n", args);
   }
 
   public static void printMessageAndWait(final String message, final long duration) {

@@ -3,8 +3,10 @@ package de.toxicpointer.clubmanager.utils.cli;
 import java.util.Arrays;
 
 public enum ChosenAction {
-  CREATE('A'),
-  LIST('T'),
+  CREATE_CLUB('A'),
+  LIST_CLUBS('T'),
+  CREATE_GAME_PAIRS('G'),
+  LIST_GAME_PAIRS('S'),
   END('B'),
   NONE(Character.MIN_VALUE);
 

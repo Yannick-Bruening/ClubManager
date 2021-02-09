@@ -20,7 +20,11 @@ public class TypedSerializer<T extends Serializable> {
   }
 
   public void serializeMany(final List<T> objects, final File file, final boolean append) {
-    objects.forEach(t -> writeObject(t, file, append));
+    if (!append) {
+      file.delete();
+    }
+
+    objects.forEach(t -> writeObject(t, file, true));
   }
 
   private void writeObject(final T object, final File file, final boolean append) {

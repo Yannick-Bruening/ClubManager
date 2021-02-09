@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TypedDeserializer<T extends Serializable> {
 
@@ -24,22 +25,18 @@ public class TypedDeserializer<T extends Serializable> {
   }
 
   // https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
-  public T[] deserializeMany(final File file) {
-    System.out.println(file.getAbsolutePath());
+  public List<T> deserializeMany(final File file) {
     try (final FileInputStream fileInputStream = new FileInputStream(file);
          final BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream)) {
-      final ArrayList<T> objects = new ArrayList<>();
+      final List<T> objects = new ArrayList<>();
 
       while (bufferedInputStream.available() > 0) {
         final ObjectInputStream objectInputStream = new ObjectInputStream(bufferedInputStream);
 
-        final Object readObject = objectInputStream.readObject();
-        objects.add((T) readObject);
-
-        objectInputStream.close();
+        objects.add((T) objectInputStream.readObject());
       }
 
-      return (T[]) objects.toArray();
+      return objects;
     } catch (final IOException | ClassNotFoundException exception) {
       exception.printStackTrace();
     }
