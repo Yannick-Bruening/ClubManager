@@ -55,6 +55,10 @@ public class Cli {
 
     final String input = CliHelper.getConsoleInput("Bitte eingeben: ");
     CliHelper.printBlank();
+    
+    if (input.length() == 0) {
+      return ChosenAction.NONE;
+    }
 
     return ChosenAction.getByOption(input.charAt(0));
   }
@@ -96,7 +100,7 @@ public class Cli {
    */
 
   private void generateGamePairs() {
-    gamePairManager.generateGamePairs();
+    gamePairManager.generateGamePairs(true);
   }
 
   private void listGamePairs() {
