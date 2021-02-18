@@ -6,15 +6,17 @@ import java.io.File;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Club implements Serializable {
   public static final String EOF = ".tpclub";
   @Serial
   private static final long serialVersionUID = -1041660496205820884L;
-  String clubName;
-  int points;
-  int goals;
-  int conceded;
+  private final UUID clubUuid = UUID.randomUUID();
+  private String clubName;
+  private int points;
+  private int goals;
+  private int conceded;
 
   public Club(final String clubName) {
     this(clubName, 0);
@@ -65,6 +67,10 @@ public class Club implements Serializable {
 
   public void setConceded(final int conceded) {
     this.conceded = conceded;
+  }
+
+  public UUID getClubUuid() {
+    return clubUuid;
   }
 
   public void save(final File file) {

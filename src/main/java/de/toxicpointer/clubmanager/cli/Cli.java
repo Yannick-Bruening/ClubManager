@@ -55,7 +55,7 @@ public class Cli {
 
     final String input = CliHelper.getConsoleInput("Bitte eingeben: ");
     CliHelper.printBlank();
-    
+
     if (input.length() == 0) {
       return ChosenAction.NONE;
     }
@@ -108,8 +108,8 @@ public class Cli {
     CliHelper.printf(format, "Heimverein", "Gastverein", "Heimtore", "Gasttore");
 
     gamePairManager.getGamePairs().forEach(gamePair -> CliHelper.printf(format,
-        gamePair.getHomeClub().getClubName(),
-        gamePair.getGuestClub().getClubName(),
+        gamePair.getHomeClub(clubDataManager).getClubName(),
+        gamePair.getGuestClub(clubDataManager).getClubName(),
         gamePair.getHomeGoals(),
         gamePair.getGuestGoals()));
   }
