@@ -36,14 +36,19 @@ public class GamePairManager {
 
   // This method has been proven to be faster
   private void generateGroupedGamePairs() {
+    Club home;
+    Club guest;
+    GamePair gamePair;
+    GamePair gamePair2;
+
     clubDataManager.clearGamePairs();
     for (int i = 0; i < clubDataManager.getClubs().size(); i++) {
       for (int j = i + 1; j < clubDataManager.getClubs().size(); j++) {
-        final Club home = clubDataManager.getClubs().get(i);
-        final Club guest = clubDataManager.getClubs().get(j);
+        home = clubDataManager.getClubs().get(i);
+        guest = clubDataManager.getClubs().get(j);
 
-        final GamePair gamePair = new GamePair(home, guest);
-        final GamePair gamePair2 = new GamePair(guest, home);
+        gamePair = new GamePair(home, guest);
+        gamePair2 = new GamePair(guest, home);
 
         clubDataManager.addGamePair(gamePair);
         clubDataManager.addGamePair(gamePair2);

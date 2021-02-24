@@ -2,6 +2,7 @@ package de.toxicpointer.clubmanager.cli;
 
 import de.toxicpointer.clubmanager.ClubDataManager;
 import de.toxicpointer.clubmanager.club.Club;
+import de.toxicpointer.clubmanager.gamepairs.GamePair;
 import de.toxicpointer.clubmanager.gamepairs.GamePairManager;
 import de.toxicpointer.clubmanager.utils.cli.ChosenAction;
 import de.toxicpointer.clubmanager.utils.cli.CliHelper;
@@ -30,6 +31,7 @@ public class Cli {
         case CREATE_CLUB -> createClub();
         case CREATE_GAME_PAIRS -> generateGamePairs();
         case LIST_GAME_PAIRS -> listGamePairs();
+        case GAME_RESULT_REGISTER -> addGameResults();
         case NONE -> CliHelper.printMessageAndWait("Ihre auswahl war nicht gültig! Bitte nutzen sie A,T oder B", 2000);
         // This case includes the END input as well because the behaviour of end and error always result in a SysExit
         default -> endCli();
@@ -51,6 +53,7 @@ public class Cli {
     CliHelper.println("T.) Tabelle Anzeigen");
     CliHelper.println("G.) Spielpaarungen generieren");
     CliHelper.println("S.) Spielpaarungen anzeigen");
+    CliHelper.println("E.) Ergebnisse eintragen");
     CliHelper.println("B.) Beenden");
 
     final String input = CliHelper.getConsoleInput("Bitte eingeben: ");
@@ -68,9 +71,7 @@ public class Cli {
    */
 
   private void createClub() {
-    CliHelper.printBlank();
     CliHelper.println("Verein Anlegen");
-    CliHelper.printBlank();
 
     final String name = CliHelper.getConsoleInput("Name: ");
     final int points = CliHelper.getIntegerFromConsole("Punkte: ", true);
@@ -84,15 +85,17 @@ public class Cli {
   }
 
   private void printList() {
-    CliHelper.printBlank();
-    CliHelper.printBlank();
-    CliHelper.println("Liste der Vereine: ");
+    CliHelper.printHeader("Liste der Vereine: ");
 
     final String format = "%-20s %-6s %-6s %-1.9s";
     CliHelper.printf(format, "Verein", "Punkte", "Tore", "Gegentore");
 
-    clubDataManager.getClubs().forEach(club -> CliHelper.printf(format, club.getClubName(),
-        club.getPoints(), club.getGoals(), club.getConceded()));
+    clubDataManager.getSortedClubs()
+        .forEach(club -> CliHelper.printf(format,
+            club.getClubName(),
+            club.getPoints(),
+            club.getGoals(),
+            club.getConceded()));
   }
 
   /*
@@ -107,12 +110,39 @@ public class Cli {
     final String format = "%-20s %-20s %-8s %-1.8s";
     CliHelper.printf(format, "Heimverein", "Gastverein", "Heimtore", "Gasttore");
 
+    CliHelper.printHeader("Liste der Spielpaare: ");
+
     gamePairManager.getGamePairs().forEach(gamePair -> CliHelper.printf(format,
         gamePair.getHomeClub(clubDataManager).getClubName(),
         gamePair.getGuestClub(clubDataManager).getClubName(),
         gamePair.getHomeGoals(),
         gamePair.getGuestGoals()));
   }
+
+  private void addGameResults() {
+    CliHelper.printHeader("Spielergebnis eintragen:");
+
+    final Club homeClub = CliHelper.getClubFromConsoleByString("Heimverein: ", clubDataManager);
+    final Club guestClub = CliHelper.getClubFromConsoleByString("Gastverein: ", clubDataManager);
+
+    if (homeClub.equals(guestClub)) {
+      CliHelper.println("Der Heimverein darf nicht der Gastverein sein!");
+      return;
+    }
+
+    final GamePair gamePair = clubDataManager.findGamePair(homeClub, guestClub);
+
+    final int homeGoals = CliHelper.getIntegerFromConsole("Heimtore: ", true);
+    final int guestGoals = CliHelper.getIntegerFromConsole("Gasttore: ", true);
+
+    gamePair.registerResult(clubDataManager, homeGoals, guestGoals);
+
+    CliHelper.println("Das Ergebnis wurde registriert.");
+  }
+
+  /*
+   * END CLI
+   */
 
   public void endCli() {
     CliHelper.println("Bis zum nächsten Mal");

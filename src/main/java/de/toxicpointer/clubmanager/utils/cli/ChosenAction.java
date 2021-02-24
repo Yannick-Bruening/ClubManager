@@ -7,6 +7,7 @@ public enum ChosenAction {
   LIST_CLUBS('T'),
   CREATE_GAME_PAIRS('G'),
   LIST_GAME_PAIRS('S'),
+  GAME_RESULT_REGISTER('E'),
   END('B'),
   NONE(Character.MIN_VALUE);
 

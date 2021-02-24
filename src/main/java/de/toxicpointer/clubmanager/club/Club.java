@@ -41,16 +41,20 @@ public class Club implements Serializable {
     return clubName;
   }
 
-  public void setClubName(final String clubName) {
-    this.clubName = clubName;
-  }
-
   public int getPoints() {
     return points;
   }
 
   public void setPoints(final int points) {
     this.points = points;
+  }
+
+  public void registerWin() {
+    setPoints(getPoints() + 3);
+  }
+
+  public void registerDraw() {
+    setPoints(getPoints() + 1);
   }
 
   public int getGoals() {
@@ -61,12 +65,24 @@ public class Club implements Serializable {
     this.goals = goals;
   }
 
+  public void addGoals(final int goals) {
+    setGoals(getGoals() + goals);
+  }
+
   public int getConceded() {
     return conceded;
   }
 
   public void setConceded(final int conceded) {
     this.conceded = conceded;
+  }
+
+  public void addConceded(final int conceded) {
+    setConceded(getConceded() + conceded);
+  }
+
+  public int getGoalDiff() {
+    return goals - conceded;
   }
 
   public UUID getClubUuid() {

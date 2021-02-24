@@ -1,5 +1,8 @@
 package de.toxicpointer.clubmanager.utils.cli;
 
+import de.toxicpointer.clubmanager.ClubDataManager;
+import de.toxicpointer.clubmanager.club.Club;
+
 import java.util.Scanner;
 
 public class CliHelper {
@@ -41,7 +44,14 @@ public class CliHelper {
   }
 
   public static void printf(final String format, final Object... args) {
-    System.out.printf(format + "\n", args);
+    final String formatEnd = format + "\n";
+    System.out.printf(formatEnd, args);
+  }
+
+  public static void printHeader(final String text) {
+    printBlank();
+    println(text);
+    printBlank();
   }
 
   public static void printMessageAndWait(final String message, final long duration) {
@@ -52,5 +62,20 @@ public class CliHelper {
     } catch (final InterruptedException e) {
       e.printStackTrace();
     }
+  }
+
+  public static Club getClubFromConsoleByString(final String prefix, final ClubDataManager clubDataManager) {
+    Club club = null;
+    String clubName;
+
+    while (club == null) {
+      clubName = getConsoleInput(prefix);
+      club = clubDataManager.findClub(clubName);
+
+      if (club == null) {
+        printf("Der club '%s' wurde nicht gefunden!", clubName);
+      }
+    }
+    return club;
   }
 }

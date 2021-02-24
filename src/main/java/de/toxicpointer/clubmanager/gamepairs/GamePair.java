@@ -35,11 +35,7 @@ public class GamePair implements Serializable {
   }
 
   public Club getHomeClub(final ClubDataManager clubDataManager) {
-    return clubDataManager.getClubs().stream()
-        .filter(club -> club.getClubUuid().equals(getHomeClubUuid()))
-        .limit(1)
-        .findFirst()
-        .orElse(null);
+    return clubDataManager.findClub(getHomeClubUuid());
   }
 
   public UUID getGuestClubUuid() {
@@ -47,11 +43,7 @@ public class GamePair implements Serializable {
   }
 
   public Club getGuestClub(final ClubDataManager clubDataManager) {
-    return clubDataManager.getClubs().stream()
-        .filter(club -> club.getClubUuid().equals(getGuestClubUuid()))
-        .limit(1)
-        .findFirst()
-        .orElse(null);
+    return clubDataManager.findClub(getGuestClubUuid());
   }
 
   public int getHomeGoals() {
@@ -73,6 +65,33 @@ public class GamePair implements Serializable {
   public void save(final File file) {
     final TypedSerializer<GamePair> gamePairTypedSerializer = new TypedSerializer<>();
     gamePairTypedSerializer.serialize(this, file, true);
+  }
+
+  public void registerResult(final ClubDataManager clubDataManager) {
+    registerResult(clubDataManager, getHomeGoals(), getGuestGoals());
+  }
+
+  public void registerResult(final ClubDataManager clubDataManager, final int homeGoals, final int guestGoals) {
+    final Club homeC = getHomeClub(clubDataManager);
+    homeC.addGoals(homeGoals);
+    homeC.addConceded(guestGoals);
+
+    final Club guestC = getGuestClub(clubDataManager);
+    guestC.addGoals(guestGoals);
+    guestC.addConceded(homeGoals);
+
+    if (homeGoals > guestGoals) {
+      homeC.registerWin();
+      return;
+    }
+
+    if (guestGoals > homeGoals) {
+      guestC.registerWin();
+      return;
+    }
+
+    homeC.registerDraw();
+    guestC.registerDraw();
   }
 
   @Override

@@ -7,7 +7,10 @@ import de.toxicpointer.clubmanager.utils.serialization.TypedSerializer;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class ClubDataManager {
   private final File clubFile;
@@ -57,6 +60,15 @@ public class ClubDataManager {
     return clubs;
   }
 
+  public List<Club> getSortedClubs() {
+    final List<Club> sorted = new ArrayList<>(clubs);
+    return sorted.stream()
+        .sorted(Comparator.comparingInt(Club::getPoints)
+            .thenComparingInt(Club::getGoalDiff)
+            .reversed())
+        .collect(Collectors.toList());
+  }
+
   public void saveClubs() {
     final TypedSerializer<Club> clubTypedSerializer = new TypedSerializer<>();
     clubTypedSerializer.serializeMany(clubs, clubFile, false);
@@ -84,6 +96,22 @@ public class ClubDataManager {
     if (save) {
       saveClubs();
     }
+  }
+
+  public Club findClub(final UUID uuid) {
+    return getClubs().stream()
+        .filter(club -> club.getClubUuid().equals(uuid))
+        .limit(1)
+        .findFirst()
+        .orElse(null);
+  }
+
+  public Club findClub(final String name) {
+    return getClubs().stream()
+        .filter(club -> club.getClubName().equalsIgnoreCase(name))
+        .limit(1)
+        .findFirst()
+        .orElse(null);
   }
 
   public void clearClubs() {
@@ -129,6 +157,15 @@ public class ClubDataManager {
     if (save) {
       saveGamePairs();
     }
+  }
+
+  public GamePair findGamePair(final Club home, final Club guest) {
+    return getGamePairs().stream()
+        .filter(gamePair -> gamePair.getHomeClub(this) == home
+            && gamePair.getGuestClub(this) == guest)
+        .limit(1)
+        .findFirst()
+        .orElse(null);
   }
 
   public void clearGamePairs() {
