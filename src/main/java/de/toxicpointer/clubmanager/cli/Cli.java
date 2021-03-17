@@ -32,8 +32,7 @@ public class Cli {
         case CREATE_GAME_PAIRS -> generateGamePairs();
         case LIST_GAME_PAIRS -> listGamePairs();
         case GAME_RESULT_REGISTER -> addGameResults();
-        case NONE -> CliHelper.printMessageAndWait("Ihre auswahl war nicht gültig! Bitte nutzen sie A,T oder B", 2000);
-        // This case includes the END input as well because the behaviour of end and error always result in a SysExit
+        case NONE -> CliHelper.printWaitingMessage("Ihre auswahl war nicht gültig! Bitte nutzen sie A,T oder B", 2000);
         default -> endCli();
       }
     }
@@ -81,7 +80,7 @@ public class Cli {
     final Club c = new Club(name, points, goals, conceded);
     clubDataManager.addClub(c);
 
-    CliHelper.printMessageAndWait("Es wurde folgender Verein angelegt! " + c.toString(), 2000);
+    CliHelper.printWaitingMessage("Es wurde folgender Verein angelegt! " + c.toString(), 2000);
   }
 
   private void printList() {

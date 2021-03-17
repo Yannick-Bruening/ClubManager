@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0"
+            prefWidth="800.0" stylesheets="@style/layout.css" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="de.toxicpointer.clubmanager.gui.contoller.LayoutController">
+    <left>
+        <VBox fx:id="lyNavbar" prefHeight="200.0" prefWidth="100.0" stylesheets="@style/layout.css"
+              BorderPane.alignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#onClickTable" prefHeight="37.0" prefWidth="120.0"
+                    text="Tabelle">
+                <VBox.margin>
+                    <Insets top="10.0"/>
+                </VBox.margin>
+            </Button>
+            <Button layoutX="10.0" layoutY="20.0" mnemonicParsing="false" onAction="#onClickClubs" prefHeight="37.0"
+                    prefWidth="120.0" text="Vereine">
+                <VBox.margin>
+                    <Insets top="10.0"/>
+                </VBox.margin>
+            </Button>
+            <Button layoutX="10.0" layoutY="67.0" mnemonicParsing="false" onAction="#onClickGames" prefHeight="37.0"
+                    prefWidth="120.0" text="Spiele">
+                <VBox.margin>
+                    <Insets top="10.0"/>
+                </VBox.margin>
+            </Button>
+        </VBox>
+    </left>
+    <top>
+        <HBox fx:id="menuBar" nodeOrientation="RIGHT_TO_LEFT" onMouseDragged="#onMenuMouseDrag"
+              onMousePressed="#onMenuMousePress" onMouseReleased="#onMenuMouseRelease" prefHeight="30.0"
+              prefWidth="800.0" style="-fx-background-color: #303030;" BorderPane.alignment="CENTER">
+            <Label fx:id="menuClose" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity"
+                   maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onCloseClicked"
+                   prefHeight="30.0" prefWidth="30.0" text="X" textFill="WHITE">
+                <font>
+                    <Font size="19.0"/>
+                </font>
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+            </Label>
+            <Label fx:id="menuMinimize" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0"
+                   maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                   onMouseClicked="#onMinimizeClicked" prefHeight="30.0" prefWidth="30.0" text="_" textFill="WHITE">
+                <font>
+                    <Font size="19.0"/>
+                </font>
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+            </Label>
+            <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefWidth="737.0"
+                  stylesheets="@style/layout.css" HBox.hgrow="ALWAYS">
+                <opaqueInsets>
+                    <Insets/>
+                </opaqueInsets>
+                <Label alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" text="ClubManager 2k21"
+                       textFill="#9a9a9a">
+                    <font>
+                        <Font size="19.0"/>
+                    </font>
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <HBox.margin>
+                        <Insets left="5.0"/>
+                    </HBox.margin>
+                </Label>
+            </HBox>
+        </HBox>
+    </top>
+    <center>
+        <AnchorPane fx:id="contentPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+    </center>
+</BorderPane>

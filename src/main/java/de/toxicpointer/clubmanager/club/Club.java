@@ -18,6 +18,10 @@ public class Club implements Serializable {
   private int goals;
   private int conceded;
 
+  public Club() {
+    this("");
+  }
+
   public Club(final String clubName) {
     this(clubName, 0);
   }
@@ -39,6 +43,10 @@ public class Club implements Serializable {
 
   public String getClubName() {
     return clubName;
+  }
+
+  public void setClubName(final String name) {
+    clubName = name;
   }
 
   public int getPoints() {

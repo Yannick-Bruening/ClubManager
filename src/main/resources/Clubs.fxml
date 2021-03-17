@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="458.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="de.toxicpointer.clubmanager.gui.contoller.ClubsController">
+    <BorderPane prefHeight="436.0" prefWidth="600.0" AnchorPane.bottomAnchor="-36.0"
+                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+                xmlns="http://javafx.com/javafx/11.0.1">
+        <top>
+            <Label text="Verein Erstellen" BorderPane.alignment="TOP_CENTER">
+                <BorderPane.margin>
+                    <Insets bottom="10.0" top="10.0"/>
+                </BorderPane.margin>
+                <font>
+                    <Font name="Arial Bold" size="22.0"/>
+                </font>
+            </Label>
+        </top>
+        <center>
+            <VBox prefHeight="378.0" prefWidth="590.0" BorderPane.alignment="CENTER">
+                <BorderPane.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </BorderPane.margin>
+                <TitledPane animated="false" collapsible="false" text="Name">
+                    <VBox.margin>
+                        <Insets bottom="10.0"/>
+                    </VBox.margin>
+                    <BorderPane minHeight="0.0" minWidth="0.0" prefWidth="200.0">
+                        <center>
+                            <VBox prefWidth="569.0" BorderPane.alignment="CENTER">
+                                <VBox prefWidth="600.0">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" top="10.0"/>
+                                    </VBox.margin>
+                                    <Label text="UUID">
+                                        <font>
+                                            <Font name="System Bold" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="uuidField" editable="false"/>
+                                </VBox>
+                                <VBox prefWidth="600.0">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" top="10.0"/>
+                                    </VBox.margin>
+                                    <Label text="Name">
+                                        <font>
+                                            <Font name="System Bold" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="nameField"/>
+                                </VBox>
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </TitledPane>
+                <TitledPane animated="false" collapsible="false" text="Punkte">
+                    <VBox.margin>
+                        <Insets bottom="10.0"/>
+                    </VBox.margin>
+                    <BorderPane minHeight="0.0" minWidth="0.0" prefWidth="200.0">
+                        <center>
+                            <VBox prefWidth="569.0" BorderPane.alignment="CENTER">
+                                <HBox prefWidth="200.0">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" top="10.0"/>
+                                    </VBox.margin>
+                                    <VBox prefWidth="600.0">
+                                        <HBox.margin>
+                                            <Insets right="5.0"/>
+                                        </HBox.margin>
+                                        <Label text="Tore">
+                                            <font>
+                                                <Font name="System Bold" size="14.0"/>
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="goalField" prefHeight="25.0"
+                                                   prefWidth="154.0"/>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="10.0" prefWidth="600.0">
+                                        <HBox.margin>
+                                            <Insets left="5.0"/>
+                                        </HBox.margin>
+                                        <Label text="Gegentore">
+                                            <font>
+                                                <Font name="System Bold" size="14.0"/>
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="concededField" prefHeight="25.0"
+                                                   prefWidth="154.0"/>
+                                    </VBox>
+                                </HBox>
+                                <VBox prefWidth="600.0">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" top="10.0"/>
+                                    </VBox.margin>
+                                    <Label text="Punkte">
+                                        <font>
+                                            <Font name="System Bold" size="14.0"/>
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="pointsField" prefHeight="25.0" prefWidth="154.0"/>
+                                </VBox>
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </TitledPane>
+                <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                    <buttons>
+                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onClickSave"
+                                text="Speichern"/>
+                    </buttons>
+                </ButtonBar>
+            </VBox>
+        </center>
+        <left>
+        </left>
+    </BorderPane>
+</AnchorPane>

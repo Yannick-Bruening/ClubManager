@@ -62,11 +62,14 @@ public class ClubDataManager {
 
   public List<Club> getSortedClubs() {
     final List<Club> sorted = new ArrayList<>(clubs);
+    // Abra kadabra Sort ordinata *Woosh*
     return sorted.stream()
-        .sorted(Comparator.comparingInt(Club::getPoints)
+        .sorted(Comparator
+            .comparingInt(Club::getPoints)
             .thenComparingInt(Club::getGoalDiff)
             .reversed())
         .collect(Collectors.toList());
+    // Now the returned list is sorted
   }
 
   public void saveClubs() {

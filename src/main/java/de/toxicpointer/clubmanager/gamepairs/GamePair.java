@@ -92,6 +92,9 @@ public class GamePair implements Serializable {
 
     homeC.registerDraw();
     guestC.registerDraw();
+
+    clubDataManager.saveGamePairs();
+    clubDataManager.saveClubs();
   }
 
   @Override

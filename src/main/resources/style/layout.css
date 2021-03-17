@@ -1,0 +1,37 @@
+#lyNavbar {
+    -fx-background-color: #303030;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+#menuBar {
+    -fx-background-color: #303030;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+#menuClose:hover {
+    -fx-background-color: #ac0000;
+}
+
+#menuMinimize:hover {
+    -fx-background-color: #505054;
+}
+
+.rootpane {
+    -fx-border-insets: 23;
+    -fx-background-insets: 23;
+    -fx-border-color: gray;
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+}
+
+.button {
+    -fx-background-color: #262628;
+    -fx-text-fill: #fafafa;
+    -fx-font-weight: Bolder;
+}
+
+.button:hover {
+    -fx-background-color: #3c3c3f;
+    -fx-cursor: HAND;
+}

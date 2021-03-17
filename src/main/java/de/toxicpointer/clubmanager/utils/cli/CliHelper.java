@@ -6,9 +6,6 @@ import de.toxicpointer.clubmanager.club.Club;
 import java.util.Scanner;
 
 public class CliHelper {
-  private CliHelper() {
-  }
-
   public static String getConsoleInput(final String prefix) {
     System.out.print(prefix);
     return new Scanner(System.in).nextLine();
@@ -54,13 +51,14 @@ public class CliHelper {
     printBlank();
   }
 
-  public static void printMessageAndWait(final String message, final long duration) {
+  public static void printWaitingMessage(final String message, final long duration) {
     println(message);
 
     try {
       Thread.sleep(duration);
     } catch (final InterruptedException e) {
-      e.printStackTrace();
+      System.err.println("Could not sleep Thread");
+      Thread.currentThread().interrupt();
     }
   }
 
